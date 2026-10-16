@@ -201,6 +201,21 @@
 
 .envelope__flap-face--inner {
   transform: rotateX(180deg);
+  visibility: hidden;
+}
+
+/*
+ * Swap faces exactly halfway through the 0.8s turn, when the flap is edge-on.
+ * (Safari does not reliably honour backface-visibility here, so we don't depend on it.)
+ */
+.envelope-scene:is([data-stage='flap'], [data-stage='rising'], [data-stage='expanding']) .envelope__flap-face--outer {
+  visibility: hidden;
+  transition: visibility 0s linear 0.4s;
+}
+
+.envelope-scene:is([data-stage='flap'], [data-stage='rising'], [data-stage='expanding']) .envelope__flap-face--inner {
+  visibility: visible;
+  transition: visibility 0s linear 0.4s;
 }
 
 /* The small card waiting inside the envelope */
@@ -589,16 +604,25 @@
   margin-top: clamp(8px, 2vh, 18px);
 }
 
-/* Short phones: drop the secondary family lines so the card fits without scrolling. */
-@media (max-height: 720px) {
-  .inv-card__lineage,
-  .inv-card__blessing {
-    display: none;
-  }
+/* Fit levels, set by InvitationCard after measuring (see useFitToScreen). */
+.inv-card__inner:is([data-fit='1'], [data-fit='2']) :is(.inv-card__lineage, .inv-card__blessing) {
+  display: none;
 }
 
-@media (max-height: 560px) and (orientation: landscape) {
-  .inv-card__arabic {
-    display: none;
-  }
+.inv-card__inner[data-fit='2'] {
+  gap: 2px;
+  padding-block: 22px 18px;
+  --card-small: clamp(10.5px, min(3vw, 1.7vh), 13px);
+}
+
+.inv-card__inner[data-fit='2'] .inv-card__name {
+  font-size: clamp(26px, min(8vw, 4.6vh), 44px);
+}
+
+.inv-card__inner[data-fit='2'] .inv-card__arabic {
+  font-size: clamp(18px, min(5vw, 3vh), 26px);
+}
+
+.inv-card__inner[data-fit='2'] .inv-card__continue {
+  margin-top: 6px;
 }

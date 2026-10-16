@@ -221,6 +221,12 @@
   width: clamp(20px, 6vw, 28px);
 }
 
+@media (min-width: 1024px) {
+  .hero__arch {
+    width: 440px;
+  }
+}
+
 .hero__content {
   position: relative;
   display: flex;

@@ -18,7 +18,7 @@ export function formatLongDate(iso: string, timeZone = tz) {
 export function formatTime(iso: string, timeZone = tz) {
   return new Intl.DateTimeFormat('en-US', { hour: 'numeric', minute: '2-digit', hour12: true, timeZone })
     .format(new Date(iso))
-    .replace(/\u202f/g, ' ')
+    .replace(/[\u202f ]/g, '\u00a0')
 }
 
 /** "12:00 PM – 3:00 PM" */

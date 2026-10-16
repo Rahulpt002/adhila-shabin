@@ -1,4 +1,4 @@
-import type { CSSProperties, Ref } from 'react'
+import { useLayoutEffect, useRef, type CSSProperties, type Ref } from 'react'
 import { wedding } from '../config/wedding'
 import { dateParts, formatTime } from '../lib/date'
 import { Divider, GoldFern, SageSprig } from './Botanical'
@@ -12,10 +12,36 @@ interface Props {
 
 const stagger = (i: number) => ({ '--i': i }) as CSSProperties
 
+/**
+ * Keeps the whole card readable without scrolling on short screens:
+ * level 1 drops the secondary family lines (they also appear in "Wedding Details"),
+ * level 2 tightens type and spacing. Anything still taller simply scrolls inside the card.
+ */
+function useFitToScreen() {
+  const innerRef = useRef<HTMLDivElement>(null)
+  useLayoutEffect(() => {
+    const inner = innerRef.current
+    if (!inner) return
+    const fit = () => {
+      inner.dataset.fit = '0'
+      for (const level of ['1', '2']) {
+        if (inner.scrollHeight <= inner.clientHeight + 1) break
+        inner.dataset.fit = level
+      }
+    }
+    fit()
+    document.fonts?.ready.then(fit)
+    window.addEventListener('resize', fit)
+    return () => window.removeEventListener('resize', fit)
+  }, [])
+  return innerRef
+}
+
 /** The full-screen invitation revealed from the envelope — a digital echo of the printed card. */
 export function InvitationCard({ ref, shown, onContinue }: Props) {
   const { blessing, hosts, groom, bride, venue, date } = wedding
   const d = dateParts(date.start)
+  const innerRef = useFitToScreen()
   let i = 0
 
   return (
@@ -30,7 +56,7 @@ export function InvitationCard({ ref, shown, onContinue }: Props) {
       <GoldFern className="inv-card__corner inv-card__corner--bl" />
       <SageSprig className="inv-card__corner inv-card__corner--br" />
 
-      <div className="inv-card__inner">
+      <div className="inv-card__inner" ref={innerRef}>
         <h2 id="inv-card-title" className="sr-only">
           Wedding invitation: {groom.fullName} and {bride.fullName}
         </h2>
