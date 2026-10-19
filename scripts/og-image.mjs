@@ -11,7 +11,7 @@ const browser = await chromium.launch()
 try {
   const page = await browser.newPage({ viewport: { width: 1200, height: 630 }, reducedMotion: 'reduce' })
   await page.goto('http://localhost:4174/')
-  await page.addStyleTag({ content: '.skip-btn, .petals { display: none !important; }' })
+  await page.addStyleTag({ content: '.petals, .music-toggle { display: none !important; }' })
   await page.evaluate(() => document.fonts.ready)
   await page.waitForTimeout(300)
   await page.screenshot({ path: 'public/og-image.jpg', type: 'jpeg', quality: 86 })
