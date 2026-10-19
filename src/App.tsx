@@ -1,72 +1,54 @@
-import { useCallback, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { wedding } from './config/wedding'
-import { openedMemory, useScrollReveal } from './lib/hooks'
-import { CoupleStory } from './components/CoupleStory'
-import { InvitationEnvelope } from './components/InvitationEnvelope'
-import { PhotoGallery } from './components/PhotoGallery'
-import { RSVPForm } from './components/RSVPForm'
-import { SiteNav, type NavItem } from './components/SiteNav'
-import { WeddingCountdown } from './components/WeddingCountdown'
-import { WeddingDetails } from './components/WeddingDetails'
-import { WeddingEvents } from './components/WeddingEvents'
-import { WeddingFooter } from './components/WeddingFooter'
-import { WelcomeHero } from './components/WelcomeHero'
+import { useBackgroundMusic, useScrollReveal } from './lib/hooks'
+import { CoverPage } from './components/CoverPage'
+import { InvitationPage } from './components/InvitationPage'
+import { MusicToggle } from './components/MusicToggle'
+import { VenuePage } from './components/VenuePage'
 
-const NAV_ITEMS: NavItem[] = [
-  { id: 'welcome', label: 'Welcome' },
-  ...(wedding.story ? [{ id: 'story', label: 'Our Story' }] : []),
-  { id: 'details', label: 'Details' },
-  { id: 'countdown', label: 'Countdown' },
-  ...(wedding.events.length ? [{ id: 'events', label: 'Events' }] : []),
-  ...(wedding.gallery.enabled && wedding.gallery.images.length ? [{ id: 'gallery', label: 'Gallery' }] : []),
-  { id: 'rsvp', label: 'RSVP' },
-]
+type Stage = 'cover' | 'leaving' | 'open'
+
+const COVER_EXIT_MS = 1100
+const COVER_EXIT_REDUCED_MS = 300
 
 export default function App() {
-  // Guests returning in the same tab session (reload, back navigation) go straight to the site.
-  const [showEnvelope, setShowEnvelope] = useState(() => !openedMemory.get())
-  const [replayKey, setReplayKey] = useState(0)
+  const [stage, setStage] = useState<Stage>('cover')
   const titleRef = useRef<HTMLHeadingElement>(null)
+  const music = useBackgroundMusic(wedding.music.src, wedding.music.volume)
 
-  useScrollReveal(!showEnvelope)
+  useScrollReveal(stage !== 'cover')
 
-  const handleOpened = useCallback(() => {
-    openedMemory.set()
-    setShowEnvelope(false)
-    requestAnimationFrame(() => {
-      // Honour a shared deep link such as …/#rsvp once the invitation has been opened.
-      const target = window.location.hash && document.querySelector(window.location.hash)
-      if (target && target.id !== 'welcome') target.scrollIntoView()
-      else titleRef.current?.focus({ preventScroll: true })
-    })
-  }, [])
+  // The pages behind the cover don't scroll until it has been opened.
+  useEffect(() => {
+    document.documentElement.classList.toggle('is-locked', stage !== 'open')
+  }, [stage])
 
-  const replay = useCallback(() => {
-    window.scrollTo({ top: 0 })
-    setReplayKey((k) => k + 1)
-    setShowEnvelope(true)
-  }, [])
+  const open = useCallback(() => {
+    if (stage !== 'cover') return
+    // Must run inside the tap itself, or mobile browsers block the sound.
+    music.play()
+    setStage('leaving')
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    window.setTimeout(
+      () => {
+        window.scrollTo({ top: 0 })
+        setStage('open')
+        requestAnimationFrame(() => titleRef.current?.focus({ preventScroll: true }))
+      },
+      reduced ? COVER_EXIT_REDUCED_MS : COVER_EXIT_MS,
+    )
+  }, [stage, music])
 
   return (
     <>
-      {showEnvelope && <InvitationEnvelope key={replayKey} onDone={handleOpened} />}
+      {stage !== 'open' && <CoverPage leaving={stage === 'leaving'} onOpen={open} />}
 
-      <div className="site" inert={showEnvelope}>
-        <a className="skip-link" href="#details">
-          Skip to wedding details
-        </a>
-        <SiteNav items={NAV_ITEMS} />
-        <main>
-          <WelcomeHero titleRef={titleRef} revealed={!showEnvelope} />
-          <CoupleStory />
-          <WeddingDetails />
-          <WeddingCountdown />
-          <WeddingEvents />
-          <PhotoGallery />
-          <RSVPForm />
-        </main>
-        <WeddingFooter onReplay={replay} />
-      </div>
+      <main className="pages" inert={stage === 'cover'}>
+        <InvitationPage titleRef={titleRef} />
+        <VenuePage />
+      </main>
+
+      {music.available && <MusicToggle playing={music.playing} title={wedding.music.title} onToggle={music.toggle} />}
     </>
   )
 }
