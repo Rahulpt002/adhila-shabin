@@ -17,12 +17,12 @@ export const wedding = {
   site: {
     title: 'Shabin & Adhila · Wedding Invitation',
     description:
-      'Shamsuddin & Shameena Shamsuddin invite you to the wedding of Mohammed Shabin Shamsuddin & Adhila Jamal — Sunday, 27 December 2026, Peruma Auditorium, Payyoli.',
+      'Shamsuddin & Shameena Shamsuddin invite you to the wedding of Mohammed Shabin Shamsuddin & Adhila Jamal K U — Sunday, 27 December 2026, Peruma Auditorium, Payyoli.',
   },
 
   blessing: {
-    arabic: 'بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ',
-    translation: 'In the name of Allah',
+    arabic: 'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ',
+    translation: 'In the Name of Allah',
   },
 
   groom: {
@@ -32,7 +32,7 @@ export const wedding = {
 
   bride: {
     firstName: 'Adhila',
-    fullName: 'Adhila Jamal',
+    fullName: 'Adhila Jamal K U',
   } as Person,
 
   /** The main celebration. Times are ISO 8601 with the venue's UTC offset. */
@@ -57,7 +57,9 @@ export const wedding = {
   },
 
   invitation: {
-    lead: 'You are invited to the wedding of',
+    lead: 'Together with love and Allah’s blessings,',
+    /** Shown under the couple's names. */
+    invite: 'Invite you to celebrate the beginning of our beautiful journey.',
   },
 
   closing: {
@@ -71,9 +73,9 @@ export const wedding = {
    * The music button hides itself if the file is missing.
    */
   music: {
-    /** 1:55–2:10 of the song, cut to 15 seconds so it loads instantly. It loops with a short fade. */
-    src: 'music/tose-naina.mp3',
-    title: 'Tose Naina',
+    /** Song.mp3 from 18.5 seconds to the end, cut into its own file so it loads quickly. It loops with a short fade. */
+    src: 'music/wedding-song.mp3',
+    title: 'Wedding song',
     volume: 0.6,
   },
 

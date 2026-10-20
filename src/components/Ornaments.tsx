@@ -316,6 +316,13 @@ export const PinIcon = ({ className }: { className?: string }) => (
   </Icon>
 )
 
+/** Outlined heart (♡) drawn as SVG so it looks the same on every phone. */
+export const HeartIcon = ({ className }: { className?: string }) => (
+  <Icon className={className}>
+    <path d="M12 19.5s-7-4.3-7-9.6A3.9 3.9 0 0 1 12 7.6a3.9 3.9 0 0 1 7 2.3c0 5.3-7 9.6-7 9.6Z" />
+  </Icon>
+)
+
 export const NoteIcon = ({ className }: { className?: string }) => (
   <svg className={className} viewBox="0 0 24 24" aria-hidden="true" focusable="false">
     <path d="M10 17.5V5.5l8-2v3l-6 1.5v9.5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" />

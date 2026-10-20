@@ -27,10 +27,10 @@ The first time you run the tests, install the test browsers with `npx playwright
 
 ## Background song
 
-The song is **Tose Naina**. The site plays only the 1:55–2:10 part, cut into its own 15-second file:
+The site plays `public/music/Song.mp3` from 18.5 seconds to the end, cut into its own 26-second file:
 
 ```
-public/music/tose-naina.mp3
+public/music/wedding-song.mp3
 ```
 
 - It starts when the guest taps **Open Invitation**, because browsers only allow sound after a tap. It then loops, fading in and out at each end so the repeat sounds smooth. On iPhone the fade is skipped because Safari doesn't let pages change the volume, so the clip simply loops.

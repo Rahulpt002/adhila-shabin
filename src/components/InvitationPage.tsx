@@ -2,7 +2,7 @@ import type { Ref } from 'react'
 import { wedding } from '../config/wedding'
 import { dateParts, formatTime } from '../lib/date'
 import { Frame } from './Frame'
-import { CalendarIcon, ClockIcon, Divider } from './Ornaments'
+import { CalendarIcon, ClockIcon, Divider, HeartIcon } from './Ornaments'
 
 /** Page 2: blessing, the couple, and the date and time tiles. */
 export function InvitationPage({ titleRef }: { titleRef: Ref<HTMLHeadingElement> }) {
@@ -26,11 +26,11 @@ export function InvitationPage({ titleRef }: { titleRef: Ref<HTMLHeadingElement>
 
         <div className="couple">
           <p className="couple__name">{groom.fullName}</p>
-          <p className="couple__amp" aria-hidden="true">
-            &amp;
-          </p>
+          <HeartIcon className="couple__heart" />
           <p className="couple__name">{bride.fullName}</p>
         </div>
+
+        <p className="italic card__invite">{invitation.invite}</p>
 
         <Divider className="card__divider" />
 
