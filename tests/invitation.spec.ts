@@ -101,7 +101,8 @@ test.describe('Invitation', () => {
     const maps = page.getByRole('link', { name: /View on Google Maps/ })
     await expect(maps).toHaveAttribute('href', /google\.com\/maps.*Peruma/)
     await expect(maps).toHaveAttribute('target', '_blank')
-    await expect(page.locator('#venue')).toContainText('May Allah bless you both')
+    await expect(page.locator('#venue')).toContainText('And We created you in pairs')
+    await expect(page.locator('#venue')).toContainText('Your presence and duas would mean the world to us.')
   })
 })
 

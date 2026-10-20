@@ -62,9 +62,12 @@ export const wedding = {
     invite: 'Invite you to celebrate the beginning of our beautiful journey.',
   },
 
+  /** Closes page 3: a Qur'an verse often used on wedding invitations, then a note to guests. */
   closing: {
-    arabic: 'بَارَكَ ٱللَّٰهُ لَكُمَا',
-    translation: 'May Allah bless you both',
+    arabic: 'وَخَلَقْنَاكُمْ أَزْوَاجًا',
+    translation: 'And We created you in pairs',
+    source: 'Qur’an 78:8',
+    message: 'Your presence and duas would mean the world to us.',
   },
 
   /**

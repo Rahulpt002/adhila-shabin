@@ -62,7 +62,7 @@ function Countdown() {
   )
 }
 
-/** Page 3: venue and directions, the countdown, and the closing blessing. */
+/** Page 3: venue and directions, the countdown, and the closing verse. */
 export function VenuePage() {
   const { venue, closing } = wedding
 
@@ -90,6 +90,8 @@ export function VenuePage() {
             {closing.arabic}
           </p>
           <p className="caps caps--gold">{closing.translation}</p>
+          <p className="closing__source">{closing.source}</p>
+          <p className="italic closing__message">{closing.message}</p>
         </div>
       </article>
     </section>

@@ -4,7 +4,7 @@ A three-page digital wedding invitation with background music:
 
 1. **Cover**: Bismillah, "The wedding of", the couple's names, the date, and an **Open Invitation** button.
 2. **Invitation**: the Arabic Bismillah, "You are invited to the wedding of", the couple, and date and time tiles.
-3. **Venue**: the venue with a Google Maps button, a live countdown, the closing blessing بَارَكَ ٱللَّٰهُ لَكُمَا.
+3. **Venue**: the venue with a Google Maps button, a live countdown, the verse وَخَلَقْنَاكُمْ أَزْوَاجًا ("And We created you in pairs", Qur'an 78:8) and a closing note to guests.
 
 Built with **Vite, React 19 and TypeScript**. The peonies, gold scrollwork and embossed paper are all inline SVG and CSS, so there are no image downloads. Fonts are bundled into the build, so the site makes no Google Fonts requests.
 
@@ -66,7 +66,7 @@ src/
   components/
     CoverPage.tsx           page 1
     InvitationPage.tsx      page 2
-    VenuePage.tsx           page 3 (venue, countdown, blessing)
+    VenuePage.tsx           page 3 (venue, countdown, closing verse)
     MusicToggle.tsx         floating play/pause button
     Frame.tsx               ornate page frame
     Ornaments.tsx           SVG peonies, leaves, scrollwork, dividers, icons
