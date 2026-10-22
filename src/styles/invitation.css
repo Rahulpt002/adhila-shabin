@@ -250,6 +250,15 @@
   margin-top: 16px;
   font-size: 1.2rem;
   line-height: 1.4;
+  /* Honour the line break in the config text. */
+  white-space: pre-line;
+}
+
+.card__insha {
+  margin-top: 16px;
+  font-size: 1.5rem;
+  line-height: 1.6;
+  color: var(--gold-deep);
 }
 
 .card__divider {

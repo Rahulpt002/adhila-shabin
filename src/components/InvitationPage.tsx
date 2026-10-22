@@ -31,6 +31,9 @@ export function InvitationPage({ titleRef }: { titleRef: Ref<HTMLHeadingElement>
         </div>
 
         <p className="italic card__invite">{invitation.invite}</p>
+        <p className="arabic card__insha" lang="ar" dir="rtl">
+          {invitation.inShaAllah}
+        </p>
 
         <Divider className="card__divider" />
 

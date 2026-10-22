@@ -87,6 +87,7 @@ test.describe('Invitation', () => {
     const card = page.locator('#invitation .card')
     await expect(card).toContainText('Together with love and Allah’s blessings,')
     await expect(card).toContainText('Invite you to celebrate the beginning of our beautiful journey.')
+    await expect(card).toContainText('إِنْ شَاءَ اللَّهُ')
     await expect(card.getByText('Mohammed Shabin Shamsuddin', { exact: true })).toBeVisible()
     await expect(card.getByText('Adhila Jamal K U', { exact: true })).toBeVisible()
     await expect(card.locator('.tile__day')).toHaveText('27')
