@@ -239,11 +239,17 @@
   color: var(--burgundy);
 }
 
-.couple__amp {
-  font-family: var(--font-script);
-  font-size: 1.5rem;
-  line-height: 1.1;
+.couple__heart {
+  width: 22px;
+  height: 22px;
+  margin: 8px auto;
   color: var(--gold);
+}
+
+.card__invite {
+  margin-top: 16px;
+  font-size: 1.2rem;
+  line-height: 1.4;
 }
 
 .card__divider {
@@ -412,6 +418,20 @@
 
 .closing .caps {
   font-size: 0.72rem;
+  line-height: 1.7;
+}
+
+.closing__source {
+  margin-top: 2px;
+  font-size: 0.85rem;
+  font-style: italic;
+  color: var(--muted);
+}
+
+.closing__message {
+  margin-top: 18px;
+  font-size: 1.2rem;
+  line-height: 1.4;
 }
 
 /* ── Music button ───────────────────────────────────────────────────────── */
