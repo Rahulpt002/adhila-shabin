@@ -58,8 +58,10 @@ export const wedding = {
 
   invitation: {
     lead: 'Together with love and Allah’s blessings,',
-    /** Shown under the couple's names. */
-    invite: 'Invite you to celebrate the beginning of our beautiful journey.',
+    /** Shown under the couple's names. `\n` starts a new line. */
+    invite: 'Invite you to celebrate the beginning of our\nbeautiful journey.',
+    /** "In sha Allah", shown in Arabic under the invite line. */
+    inShaAllah: 'إِنْ شَاءَ اللَّهُ',
   },
 
   /** Closes page 3: a Qur'an verse often used on wedding invitations, then a note to guests. */
